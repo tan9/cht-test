@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<!-- 供一般元件使用的 Console Output Appender，主要是指第三方函式庫。 -->
+	<appender name="STDOUT_INFO" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 供 gov.fdc Logger 使用的 Console Output Appender，補足 STDOUT_INFO 不足的 TRACE 級別。 -->
+	<appender name="STDOUT_TRACE_EXACT" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>TRACE</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 供 gov.fdc Logger 使用的 Console Output Appender，補足 STDOUT_INFO 不足的 DEBUG 級別。 -->
+	<appender name="STDOUT_DEBUG_EXACT" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+	<!-- 供寫入本案開發類別相關 Logger 資訊的 Appender。 -->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>./target/test-main-%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 寫入所有測試期間所有 Log 訊息 (包含本案開發類別) 的 Appender。 -->
+	<appender name="FILE_3RD_PARTY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>./target/test-3rd-party-%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+	<!-- 設定一般 Logger 的 Appender，主要是針對第三方函式庫。 -->
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT_INFO" />
+		<appender-ref ref="FILE_3RD_PARTY" />
+	</root>
+
+	<!-- 微調本案開發類別相關 Logger 的設定。 -->
+	<logger name="gov.fdc" level="ALL">
+		<appender-ref ref="STDOUT_TRACE_EXACT" />
+		<appender-ref ref="STDOUT_DEBUG_EXACT" />
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<!-- 最後再將 gov.fdc.test 套件裡的元件排除。 -->
+	<logger name="gov.fdc.test" level="INFO" />
+</configuration>
