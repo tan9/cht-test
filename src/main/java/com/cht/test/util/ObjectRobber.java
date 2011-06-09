@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
@@ -22,7 +24,7 @@ import org.springframework.util.Assert;
  * 雖然我很想把他取名為 ObjectRapper，但是理智還是讓我沒做出這件事。
  * </p>
  * <p>
- * 本類別大量使用 <a href="http://java.sun.com/docs/books/tutorial/reflect/index.html">
+ * 本類別大量使用 <a href="http://download.oracle.com/javase/tutorial/reflect/index.html">
  * Reflection</a> 機制進行物件操作，有興趣的話可以自行研究。
  *
  * @author <a href="matilto:beta@cht.com.tw">黃培棠</a>
@@ -163,7 +165,7 @@ public class ObjectRobber {
     }
 
     /**
-     * 將物件中有 {@link Autowired} 標註，且資料型態與指定值相符的欄位填入物件。
+     * 將物件中有 {@link Autowired} 或是 {@link Resource} 標註，且資料型態與指定值相符的欄位填入物件。
      *
      * @param object
      *            包含設值對象的實體物件。
@@ -184,10 +186,13 @@ public class ObjectRobber {
 
         Field[] fields = object.getClass().getDeclaredFields();
         for (Field field : fields) {
-            if (field.getAnnotation(Autowired.class) != null
+            if ((field.getAnnotation(Autowired.class) != null || field
+                    .getAnnotation(Resource.class) != null)
                     && field.getType().isAssignableFrom(valueToBeInjected.getClass())) {
+
                 try {
                     set(object, field.getName(), valueToBeInjected);
+
                 } catch (NoSuchFieldException e) {
                     throw new RuntimeException("Cannot set value.", e);
                 }
@@ -203,9 +208,11 @@ public class ObjectRobber {
         while (field == null) {
             try {
                 field = klass.getDeclaredField(fieldName);
+
             } catch (NoSuchFieldException e) {
                 if (klass.getSuperclass() != null) {
                     klass = klass.getSuperclass();
+
                 } else {
                     throw e;
                 }
@@ -279,13 +286,14 @@ public class ObjectRobber {
             Class<?>[] possibleArgs = methods[i].getParameterTypes();
             if (Arrays.equals(possibleArgs, args)) {
                 return invoke(object.getClass(), object, methodName, args, params);
+
             } else if (isCompatiable(possibleArgs, args)) {
                 possibleIndexSet.add(Integer.valueOf(i));
             }
         }
 
         if (possibleIndexSet.size() == 1) {
-            Integer index = (Integer) possibleIndexSet.iterator().next();
+            Integer index = possibleIndexSet.iterator().next();
             args = methods[index.intValue()].getParameterTypes();
             return invoke(object.getClass(), object, methodName, args, params);
 
@@ -343,9 +351,11 @@ public class ObjectRobber {
         while (method == null) {
             try {
                 method = klass.getDeclaredMethod(methodName, args);
+
             } catch (NoSuchMethodException e) {
                 if (klass.getSuperclass() != null) {
                     klass = klass.getSuperclass();
+
                 } else {
                     throw e;
                 }
@@ -357,7 +367,7 @@ public class ObjectRobber {
             method.setAccessible(true);
         }
 
-        Object value = method.invoke(object, (Object[]) params);
+        Object value = method.invoke(object, params);
 
         if (isAccessable == false) {
             method.setAccessible(false);
