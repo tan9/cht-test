@@ -99,7 +99,7 @@ public final class ConcurrentRule implements TestRule, MethodRule {
                                     // case of exceptions directly subclassing
                                     // Throwable (should not occur - bad
                                     // programming)
-                                    RuntimeException e = new RuntimeException(throwable
+                                    RuntimeException e = new RuntimeException(throwable // NOPMD
                                             .getMessage(), throwable);
                                     throw e;
                                 }
