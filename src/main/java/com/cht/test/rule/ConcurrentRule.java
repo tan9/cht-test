@@ -7,8 +7,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorCompletionService;
 
+import org.junit.rules.MethodRule;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
+import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
 import com.cht.test.annotation.Concurrent;
@@ -42,7 +44,7 @@ import com.cht.test.annotation.Concurrent;
  *      "http://blog.mycila.com/2009/11/writing-your-own-junit-extensions-using.html"
  *      >Writing your own JUnit extensions using @Rule</a>
  */
-public final class ConcurrentRule implements TestRule {
+public final class ConcurrentRule implements TestRule, MethodRule {
 
     /**
      * {@inheritDoc}
@@ -123,5 +125,15 @@ public final class ConcurrentRule implements TestRule {
                 }
             }
         };
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Statement apply(Statement base, FrameworkMethod method, Object target) {
+        Description description = Description.createTestDescription(method.getMethod()
+                .getDeclaringClass(), method.getName(), method.getAnnotations());
+        return apply(base, description);
     }
 }
