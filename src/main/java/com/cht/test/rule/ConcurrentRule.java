@@ -54,33 +54,35 @@ public final class ConcurrentRule implements TestRule, MethodRule {
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                Concurrent concurrent = description.getAnnotation(Concurrent.class);
-                if (concurrent == null)
+                final Concurrent concurrent = description.getAnnotation(Concurrent.class);
+                if (concurrent == null) {
                     base.evaluate();
 
-                else {
+                } else {
                     // create an executor which simply spawns threads to execute
                     // runnables
                     Executor executor = new Executor() {
-                        final String name = description.getMethodName();
-                        int count = 0;
+                        private final String name = description.getMethodName();
+                        private int count = 0;
 
                         @Override
                         public void execute(Runnable command) {
-                            new Thread(command, name + "-thread-" + count++).start();
+                            Thread thread = new Thread(command, name + "-thread-" + count++);
+                            thread.start();
                         }
                     };
                     // create a completion service to get jobs in the order they
                     // finish, to be able to cancel remaining jobs as fast as
                     // possible if an exception occurs
-                    CompletionService<Void> completionService = new ExecutorCompletionService<Void>(
-                            executor);
+                    CompletionService<Void> completionService;
+                    completionService = new ExecutorCompletionService<Void>(executor);
                     // latch used to pause all threads and start all of them
                     // (nearly) at the same time
                     final CountDownLatch go = new CountDownLatch(1);
                     // create the tasks
                     for (int i = 0; i < concurrent.value(); i++) {
                         completionService.submit(new Callable<Void>() {
+
                             @Override
                             public Void call() throws Exception {
                                 try {
@@ -90,12 +92,13 @@ public final class ConcurrentRule implements TestRule, MethodRule {
                                 } catch (InterruptedException e) {
                                     Thread.currentThread().interrupt();
 
-                                } catch (Throwable throwable) {
-                                    if (throwable instanceof Exception)
-                                        throw (Exception) throwable;
+                                } catch (Exception exception) {
+                                    throw exception;
 
-                                    if (throwable instanceof Error)
-                                        throw (Error) throwable;
+                                } catch (Error error) {
+                                    throw error;
+
+                                } catch (Throwable throwable) {
                                     // case of exceptions directly subclassing
                                     // Throwable (should not occur - bad
                                     // programming)
@@ -116,12 +119,14 @@ public final class ConcurrentRule implements TestRule, MethodRule {
                         } catch (ExecutionException e) {
                             // only keep the first exception, but wait for all
                             // threads to finish
-                            if (throwable == null)
+                            if (throwable == null) {
                                 throwable = e.getCause();
+                            }
                         }
                     }
-                    if (throwable != null)
+                    if (throwable != null) {
                         throw throwable;
+                    }
                 }
             }
         };

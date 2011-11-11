@@ -6,12 +6,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import com.cht.test.rule.ConcurrentRule;
-
 /**
- * 測試案例同步處理的 Annotation，由 {@link ConcurrentRule} 控制。
+ * 測試案例同步處理的 Annotation，由 {@link com.cht.test.rule.ConcurrentRule ConcurrentRule} 控制。
  *
  * 用法如下:
+ *
  * <pre>
  * public final class ConcurrentTest {
  *
@@ -39,5 +38,13 @@ import com.cht.test.rule.ConcurrentRule;
 @Target({ METHOD })
 public @interface Concurrent {
 
-    int value() default 10;
+    /**
+     * {@link #value()} 的預設值，數值為 {@value #DEFAULT_VALUE}。
+     */
+    final int DEFAULT_VALUE = 10;
+
+    /**
+     * @return 同步等級，換句話說就是要開啟的 Thread 數目。預設是 {@value #DEFAULT_VALUE}。
+     */
+    int value() default DEFAULT_VALUE;
 }
