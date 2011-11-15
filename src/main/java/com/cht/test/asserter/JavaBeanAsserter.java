@@ -71,8 +71,7 @@ public abstract class JavaBeanAsserter {
     public static void assertIsSerializable(Object target) {
         String message = String
                 .format("According to \"JavaBeans API Specification 1.01-A\" page 23:"
-                        + " All beans must support either \"Serialization\" or \"Externalization\".",
-                        target.getClass().getName());
+                        + " All beans must support either \"Serialization\" or \"Externalization\".");
         assertTrue(message, Serializable.class.isAssignableFrom(target.getClass())
                 || Externalizable.class.isAssignableFrom(target.getClass()));
     }
