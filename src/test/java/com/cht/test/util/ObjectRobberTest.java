@@ -24,7 +24,7 @@ public class ObjectRobberTest {
         HashMap<String, Integer> map = new HashMap<String, Integer>();
         Object result = ObjectRobber.get(map, "threshold");
 
-        assertEquals((int) (16 * 0.75), ((Integer) result).intValue());
+        assertEquals(16, ((Integer) result).intValue());
     }
 
     @Test
