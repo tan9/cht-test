@@ -5,9 +5,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.util.ResourceUtils;
+
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 
 /**
  * 協助測試用的 IO 存取工具。
@@ -66,20 +69,20 @@ public class UnitTestIOUtils {
      *
      * @param fileName
      *            檔案名稱。
-     * @param encoding
+     * @param charset
      *            編碼。
      * @return 字串。
      * @throws IOException
      *             代表檔案存取或轉換時發生錯誤。
      */
-    public static String loadFileAsString(String fileName, String encoding) throws IOException {
+    public static String loadFileAsString(String fileName, Charset charset) throws IOException {
         File file = loadFile(fileName, 2);
-        String result = FileUtils.readFileToString(file, encoding);
+        String result = Files.toString(file, charset);
         return result;
     }
 
     /**
-     * 使用 JVM 預設編碼將測試檔案載入成字串。
+     * 使用 UTF-8 編碼將測試檔案載入成字串。
      *
      * @param fileName
      *            檔案名稱。
@@ -89,7 +92,7 @@ public class UnitTestIOUtils {
      */
     public static String loadFileAsString(String fileName) throws IOException {
         File file = loadFile(fileName, 2);
-        String result = FileUtils.readFileToString(file);
+        String result = Files.toString(file, Charsets.UTF_8);
         return result;
     }
 }
