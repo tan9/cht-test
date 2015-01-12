@@ -2,6 +2,11 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>com.cht</groupId>
+        <artifactId>cht-parent</artifactId>
+        <version>2-SNAPSHOT</version>
+    </parent>
     <groupId>com.cht.test</groupId>
     <artifactId>cht-test</artifactId>
     <version>0.2.0-SNAPSHOT</version>
@@ -18,17 +23,10 @@
     </organization>
 
     <scm>
-        <connection>scm:svn:http://scm.tax/svn/common/trunk/cht-test
-        </connection>
-        <developerConnection>scm:svn:http://scm.tax/svn/common/trunk/cht-test
-        </developerConnection>
-        <url>http://scm.tax/svn/common/trunk/cht-test</url>
+        <url>https://github.com/ChunghwaTelecom/cht-test</url>
+        <connection>scm:git:https://github.com/ChunghwaTelecom/cht-test.git</connection>
+        <developerConnection>scm:git:https://github.com/ChunghwaTelecom/cht-test.git</developerConnection>
     </scm>
-
-    <ciManagement>
-        <system>Hudson</system>
-        <url>http://web.tax/jenkins/job/cht-test/</url>
-    </ciManagement>
 
     <developers>
         <developer>
@@ -46,8 +44,8 @@
             <id>beta</id>
             <name>黃培棠</name>
             <email>beta@cht.com.tw</email>
-            <organization>中華電信研究所</organization>
-            <organizationUrl>http://www.chttl.com.tw/</organizationUrl>
+            <organization>中華電信企業客戶分公司</organization>
+            <organizationUrl>http://www.cht.com.tw/</organizationUrl>
             <timezone>+8</timezone>
             <roles>
                 <role>Developer</role>
@@ -56,27 +54,25 @@
     </developers>
 
     <properties>
-        <java.version>1.6</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>3.0.6.RELEASE</spring.version>
-        <slf4j.version>1.6.3</slf4j.version>
+        <spring.version>4.0.9.RELEASE</spring.version>
+        <slf4j.version>1.7.10</slf4j.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>4.12</version>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>1.8.5</version>
+            <version>1.10.19</version>
         </dependency>
         <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-            <version>1.2.1</version>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>1.7.1</version>
         </dependency>
 
         <dependency>
@@ -164,170 +160,30 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <showDeprecation>true</showDeprecation>
-                    <showWarnings>true</showWarnings>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true
-                            </addDefaultImplementationEntries>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <charset>${project.build.sourceEncoding}</charset>
-                    <bottom><![CDATA[版權所有 &copy; {inceptionYear}-{currentYear} {organizationName}。保留所有權利。]]></bottom>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <configuration>
-                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
-    <profiles>
-        <!-- Hudson 預設會設定 BUILD_NUMBER 屬性值，我們可以據此啟動本 profile。 -->
-        <profile>
-            <id>hudson</id>
-            <activation>
-                <property>
-                    <name>BUILD_NUMBER</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>findbugs-maven-plugin</artifactId>
-                        <version>2.3.1</version>
-                        <configuration>
-                            <findbugsXmlOutput>true</findbugsXmlOutput>
-                            <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
-                            <xmlOutput>true</xmlOutput>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>findbugs</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>cobertura-maven-plugin</artifactId>
-                        <version>2.4</version>
-                        <configuration>
-                            <encoding>${project.build.sourceEncoding}</encoding>
-                            <formats>
-                                <format>xml</format>
-                            </formats>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>cobertura</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-pmd-plugin</artifactId>
-                        <version>2.5</version>
-                        <configuration>
-                            <linkXref>true</linkXref>
-                            <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                            <targetJdk>${java.version}</targetJdk>
-                            <excludes>
-                                <exclude>**/generated/**/*</exclude>
-                            </excludes>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>pmd</goal>
-                                    <goal>cpd</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-checkstyle-plugin</artifactId>
-                        <version>2.5</version>
-                        <configuration>
-                            <excludes>**/generated/**/*</excludes>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>checkstyle</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <repositories>
         <repository>
-            <id>tax_public</id>
-            <name>Tax Public Repository</name>
-            <url>http://repo.tax/nexus/content/repositories/public/</url>
+            <id>cht-releases-repo</id>
+            <name>ChunghwaTelecom Releases Repository</name>
+            <url>http://chunghwatelecom.github.io/repos/releases</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
             <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>cht-snapshots-repo</id>
+            <name>ChunghwaTelecom Snapshots Repository</name>
+            <url>http://chunghwatelecom.github.io/repos/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
                 <enabled>true</enabled>
+                <updatePolicy>interval:60</updatePolicy>
             </snapshots>
         </repository>
     </repositories>
-
-    <distributionManagement>
-        <repository>
-            <id>tax_releases</id>
-            <name>Tax Releases Repository</name>
-            <url>http://repo.tax/nexus/content/repositories/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>tax_snapshots</id>
-            <name>Tax Snapshots Repository</name>
-            <url>http://repo.tax/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
