@@ -54,7 +54,7 @@ public class ObjectRobberTest {
             IllegalAccessException, InvocationTargetException {
         DummyClass dummyClass = (DummyClass) ObjectRobber.genInstance(DummyClass.class);
         assertEquals(0, dummyClass.getObjectValue());
-        dummyClass = (DummyClass) ObjectRobber.genInstance(DummyClass.class, Integer.valueOf(10));
+        dummyClass = ObjectRobber.genInstance(DummyClass.class, Integer.valueOf(10));
         assertEquals(10, dummyClass.getObjectValue());
     }
 
@@ -62,7 +62,7 @@ public class ObjectRobberTest {
     public void testInvoke1() throws SecurityException, NoSuchMethodException,
             IllegalAccessException, InvocationTargetException {
         DummyClass dummyClass = new DummyClass();
-        Integer integer = (Integer) ObjectRobber.invoke(dummyClass, "getObjectValue");
+        Integer integer = ObjectRobber.invoke(dummyClass, "getObjectValue");
         assertEquals(dummyClass.getObjectValue(), integer.intValue());
     }
 
@@ -70,7 +70,7 @@ public class ObjectRobberTest {
     public void testInvoke2() throws SecurityException, NoSuchMethodException,
             IllegalAccessException, InvocationTargetException {
         DummyClass dummyClass = new DummyClass();
-        Integer integer = (Integer) ObjectRobber.invoke(dummyClass, "setObjectValue", 10);
+        Integer integer = ObjectRobber.invoke(dummyClass, "setObjectValue", 10);
         assertEquals(dummyClass.getObjectValue(), integer.intValue());
     }
 
@@ -78,7 +78,7 @@ public class ObjectRobberTest {
     public void testInvoke3() throws SecurityException, NoSuchMethodException,
             IllegalAccessException, InvocationTargetException {
         DummyClass dummyClass = new DummyClass();
-        Integer integer = (Integer) ObjectRobber.invoke(dummyClass, "getClassValue");
+        Integer integer = ObjectRobber.invoke(dummyClass, "getClassValue");
         assertEquals(DummyClass.getClassValue(), integer.intValue());
     }
 }

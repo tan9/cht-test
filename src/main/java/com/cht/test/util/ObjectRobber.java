@@ -255,7 +255,7 @@ public class ObjectRobber {
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    public static Object invoke(Object object, String methodName, Object... params)
+    public static <T> T invoke(Object object, String methodName, Object... params)
             throws SecurityException, NoSuchMethodException, IllegalAccessException,
             InvocationTargetException {
         // 必須要指定物件，否則無法取得對應的內容
@@ -339,7 +339,7 @@ public class ObjectRobber {
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    private static Object invoke(Class<?> klass, Object object, String methodName, Class<?>[] args,
+    private static <T> T invoke(Class<?> klass, Object object, String methodName, Class<?>[] args,
             Object[] params) throws SecurityException, NoSuchMethodException,
             IllegalAccessException, InvocationTargetException {
         // 如果 klass 沒指定，只給 object，那就好心的幫忙懶人設定吧
@@ -373,7 +373,9 @@ public class ObjectRobber {
             method.setAccessible(false);
         }
 
-        return value;
+        @SuppressWarnings("unchecked")
+        T result = (T) value;
+        return result;
     }
 
     /**
@@ -387,7 +389,7 @@ public class ObjectRobber {
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    public static Object genInstance(Class<?> klass, Object... initArgs)
+    public static <T> T genInstance(Class<?> klass, Object... initArgs)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException {
         Class<?>[] initArgClasses = new Class<?>[initArgs.length];
@@ -396,6 +398,9 @@ public class ObjectRobber {
         Constructor<?> constructor = klass.getDeclaredConstructor(initArgClasses);
         if (!constructor.isAccessible())
             constructor.setAccessible(true);
-        return constructor.newInstance(initArgs);
+
+        @SuppressWarnings("unchecked")
+        T result = (T) constructor.newInstance(initArgs);
+        return result;
     }
 }
