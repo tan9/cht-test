@@ -332,7 +332,7 @@ public class ObjectRobber {
      *            要呼叫的方法的引數的 Class 陣列; 如果沒有引數，可為 <code>null</code>。
      * @param params
      *            要呼叫的方法所需代入的參數; 如果不需要參數，可為 <code>null</code>。
-     * @return
+     * @return 初始化後的物件。
      * @throws SecurityException
      * @throws NoSuchMethodException
      * @throws IllegalArgumentException
@@ -379,11 +379,11 @@ public class ObjectRobber {
     }
 
     /**
-     * 輸入初始化參數，取得對應的constructor，並產生物件實體。private的constructor也可以使用。
+     * 輸入初始化參數，取得對應的 constructor，並產生物件實體。private 的 constructor 也可以使用。
      *
      * @param klass
      * @param initArgs
-     * @return
+     * @return 初始化後的物件。
      * @throws NoSuchMethodException
      * @throws InstantiationException
      * @throws IllegalAccessException
