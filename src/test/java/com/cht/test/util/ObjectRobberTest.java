@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
-import java.util.HashMap;
 
 import org.junit.Test;
 
@@ -21,10 +20,16 @@ public class ObjectRobberTest {
     @Test
     public void testGetObjectString() throws SecurityException, IllegalArgumentException,
             NoSuchFieldException, IllegalAccessException {
-        HashMap<String, Integer> map = new HashMap<String, Integer>();
-        Object result = ObjectRobber.get(map, "threshold");
+        Object map = new ObjectToBeRobbed();
+        Object result = ObjectRobber.get(map, "intField");
 
-        assertEquals(16, ((Integer) result).intValue());
+        assertEquals(7788, ((Integer) result).intValue());
+    }
+
+    private static class ObjectToBeRobbed {
+
+        @SuppressWarnings("unused")
+        private int intField = 7788;
     }
 
     @Test
