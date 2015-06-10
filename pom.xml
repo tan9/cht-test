@@ -28,31 +28,6 @@
         <developerConnection>scm:git:https://github.com/ChunghwaTelecom/cht-test.git</developerConnection>
     </scm>
 
-    <developers>
-        <developer>
-            <id>jiayun</id>
-            <name>周家芸</name>
-            <email>jiayun.zhou@iisigroup.com</email>
-            <organization>資拓宏宇國際股份有限公司</organization>
-            <organizationUrl>http://www.iisigroup.com/</organizationUrl>
-            <timezone>+8</timezone>
-            <roles>
-                <role>Developer</role>
-            </roles>
-        </developer>
-        <developer>
-            <id>beta</id>
-            <name>黃培棠</name>
-            <email>beta@cht.com.tw</email>
-            <organization>中華電信企業客戶分公司</organization>
-            <organizationUrl>http://www.cht.com.tw/</organizationUrl>
-            <timezone>+8</timezone>
-            <roles>
-                <role>Developer</role>
-            </roles>
-        </developer>
-    </developers>
-
     <properties>
         <spring.version>4.0.9.RELEASE</spring.version>
         <slf4j.version>1.7.12</slf4j.version>
