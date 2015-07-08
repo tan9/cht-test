@@ -10,10 +10,11 @@ import java.lang.reflect.Method;
 
 import javassist.Modifier;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.ClassUtils;
+import org.springframework.util.ReflectionUtils;
 
 /**
  * 輔助測試 Object 一般函式的程式。
@@ -149,14 +150,13 @@ public abstract class ObjectAsserter {
                 }
 
                 try {
-                    BeanUtils.copyProperties(newInstance, target);
+                    BeanUtils.copyProperties(target, newInstance);
 
-                    String fieldName = field.getName();
-                    String value = BeanUtils.getProperty(target, fieldName);
+                    Object value = ReflectionUtils.getField(field, target);
                     Class<?> type = field.getType();
                     Object generatedValue = null;
                     if (int.class.equals(type) || Integer.class.equals(type)) {
-                        generatedValue = Integer.parseInt(value) + 1;
+                        generatedValue = Integer.parseInt(value.toString()) + 1;
 
                     } else if (String.class.equals(type)) {
                         generatedValue = value + "~lala";
@@ -167,11 +167,11 @@ public abstract class ObjectAsserter {
                     }
 
                     if (generatedValue != null) {
-                        BeanUtils.setProperty(newInstance, fieldName, generatedValue);
+                        ReflectionUtils.setField(field, newInstance, generatedValue);
                         assertFalse(
                                 String.format(
                                         "Test equals() on property %s, original value: %s, generated value: %s",
-                                        fieldName, value, generatedValue),
+                                        field.getName(), value, generatedValue),
                                 target.equals(newInstance));
                     }
 
