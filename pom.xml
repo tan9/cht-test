@@ -29,9 +29,21 @@
     </scm>
 
     <properties>
-        <spring.version>4.1.7.RELEASE</spring.version>
+        <spring.version>4.1.8.RELEASE</spring.version>
         <slf4j.version>1.7.12</slf4j.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- commons-logging excluder, prevent downstream from include it -->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.2</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -54,12 +66,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
