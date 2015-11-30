@@ -11,13 +11,13 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
  *
  * <pre>
  * &#064;ContextConfiguration
- * public abstract class Abstract<i>&lt;系統代碼></i>Tests extends AbstractTests {
+ * public abstract class Abstract<i>&lt;系統代碼&gt;</i>Tests extends AbstractTests {
  *
  * }
  * </pre>
  *
  * 再將測試用的 Spring 設定檔放在相同 classpath 下，並取名
- * <code>Abstract<i>&lt;系統代碼></i>Tests-context.xml</code>，之後所有的測試案例都只要繼承該類別就可以了。
+ * <code>Abstract<i>&lt;系統代碼&gt;</i>Tests-context.xml</code>，之後所有的測試案例都只要繼承該類別就可以了。
  * <p>
  * 如果是需要使用到 dbUnit 及 h2 database 進行的資料庫存取測試，請使用 {@link AbstractPersistenceCapableTests}。
  *

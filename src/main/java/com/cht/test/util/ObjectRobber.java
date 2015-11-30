@@ -123,7 +123,9 @@ public class ObjectRobber {
      * @throws NoSuchFieldException
      *             表示欄位名稱錯誤。
      * @throws IllegalAccessException
+     *             代表無存取權限。
      * @throws IllegalArgumentException
+     *             代表丟入的參數錯誤。
      */
     public static void set(Class<?> klass, String fieldName, Object value)
             throws SecurityException, NoSuchFieldException, IllegalAccessException {
@@ -150,6 +152,7 @@ public class ObjectRobber {
      * @throws NoSuchFieldException
      *             表示欄位名稱錯誤。
      * @throws IllegalAccessException
+     *             代表無存取權限。
      * @throws IllegalArgumentException
      *             表示丟入的參數錯誤，均不可為 <code>null</code>。
      */
@@ -173,11 +176,8 @@ public class ObjectRobber {
      *            要指定的數值。
      * @throws SecurityException
      *             表示無法完成本項要求。
-     * @throws NoSuchFieldException
-     *             表示欄位名稱錯誤。
      * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     *             表示丟入的參數錯誤，均不可為 <code>null</code>。
+     *             代表無存取權限。
      */
     public static void manualWire(Object object, Object valueToBeInjected)
             throws SecurityException, IllegalAccessException {
@@ -248,12 +248,17 @@ public class ObjectRobber {
      *            函式名稱。
      * @param params
      *            執行該函式的參數。
+     * @param <T>
+     *            回傳物件型別。
      * @return 執行結果，如果該函式沒有回傳值，則回傳 <code>null</code>。
      * @throws SecurityException
-     * @throws IllegalArgumentException
-     * @throws NoSuchMethodException
+     *             表示無法完成本項要求。
      * @throws IllegalAccessException
+     *             代表無存取權限。
+     * @throws IllegalArgumentException
+     *             表示丟入的參數錯誤，均不可為 <code>null</code>。
      * @throws InvocationTargetException
+     *             表示呼叫底層物件時發生錯錯誤。
      */
     public static <T> T invoke(Object object, String methodName, Object... params)
             throws SecurityException, NoSuchMethodException, IllegalAccessException,
@@ -334,10 +339,15 @@ public class ObjectRobber {
      *            要呼叫的方法所需代入的參數; 如果不需要參數，可為 <code>null</code>。
      * @return 初始化後的物件。
      * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws IllegalArgumentException
+     *             表示無法完成本項要求。
+     * @throws NoSuchFieldException
+     *             表示欄位名稱錯誤。
      * @throws IllegalAccessException
+     *             代表無存取權限。
+     * @throws IllegalArgumentException
+     *             表示丟入的參數錯誤，均不可為 <code>null</code>。
      * @throws InvocationTargetException
+     *             表示呼叫底層物件時發生錯錯誤。
      */
     private static <T> T invoke(Class<?> klass, Object object, String methodName, Class<?>[] args,
             Object[] params) throws SecurityException, NoSuchMethodException,
@@ -382,12 +392,20 @@ public class ObjectRobber {
      * 輸入初始化參數，取得對應的 constructor，並產生物件實體。private 的 constructor 也可以使用。
      *
      * @param klass
+     *            要建立的物件類別。
      * @param initArgs
+     *            初始化參數。
+     * @param <T>
+     *            物件型別。
      * @return 初始化後的物件。
      * @throws NoSuchMethodException
+     *             表示沒有可用的建構式。
      * @throws InstantiationException
+     *             表示初始化過程發生錯誤。
      * @throws IllegalAccessException
+     *             表示無存取權限。
      * @throws InvocationTargetException
+     *             表示呼叫過程發生錯誤。
      */
     public static <T> T genInstance(Class<?> klass, Object... initArgs)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException,
