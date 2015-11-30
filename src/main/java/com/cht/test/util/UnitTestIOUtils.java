@@ -20,11 +20,11 @@ import com.google.common.io.Files;
 public class UnitTestIOUtils {
 
     /**
-     * 載入測試檔案，測試檔案請跟測試案例放在同一個 Package 下，命名規則為 <code>XxxTest-fileName</code>。
+     * 載入測試檔案，測試檔案請跟測試案例放在同一個 Package 下，命名規則為 {@code XxxTest-fileName}。
      * <p>
      * 例如在
-     * <code>com.cht.test.util.IOUtilsTest<code> 裡執行 <code>loadFile("test.xml")</code>
-     * ，則會載入 <code>com/cht/test/util/IOUtilsTest-test.xml</code>。
+     * {@code com.cht.test.util.IOUtilsTest} 裡執行 {@code loadFile("test.xml")}
+     * ，則會載入 {@code com/cht/test/util/IOUtilsTest-test.xml}。
      *
      * @param fileName
      *            檔案名稱。
@@ -46,11 +46,11 @@ public class UnitTestIOUtils {
 
     /**
      * 將測試檔案以 InputStream 的方式載入，測試檔案請跟測試案例放在同一個 Package 下，命名規則為
-     * <code>XxxTest-fileName</code>。
+     * {@code XxxTest-fileName}。
      * <p>
      * 例如在
-     * <code>com.cht.test.util.IOUtilsTest<code> 裡執行 <code>loadFile("test.xml")</code>
-     * ，則會載入 <code>com/cht/test/util/IOUtilsTest-test.xml</code>。
+     * {@code com.cht.test.util.IOUtilsTest} 裡執行 {@code loadFile("test.xml")}
+     * ，則會載入 {@code com/cht/test/util/IOUtilsTest-test.xml}。
      *
      * @param fileName
      *            檔案名稱。

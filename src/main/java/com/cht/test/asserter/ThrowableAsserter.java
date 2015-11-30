@@ -21,7 +21,6 @@ public abstract class ThrowableAsserter {
      * 處理特定 Type 的 Handler。
      *
      * @author <a href="mailto:beta@cht.com.tw">黃培棠</a>
-     * @param <T>
      */
     public static abstract class TypeHandler<T> {
         @SuppressWarnings("hiding")

@@ -142,7 +142,7 @@ public final class PropertyAsserter {
      * anyway based on the Reduction of Java Overengineering Act. Then again,
      * some might argue that <i>this</i> class itself embodies Java
      * Overengineering!)
-     * <p/>
+     * <p>
      * Uses a default argument for basic collection types, primitive types,
      * Dates, java.sql.Dates, and Timestamps. See
      * {@link PropertyAsserter#TYPE_ARGUMENTS}.
@@ -285,9 +285,9 @@ public final class PropertyAsserter {
      * getter and setter. Note specifically that read-only properties are
      * ignored, as there is no way for us to know how to set the value (since
      * there isn't a public setter).
-     * <p/>
+     * <p>
      * Any property names contained in the blacklist will be skipped.
-     * <p/>
+     * <p>
      *
      * @param target
      *            the object on which to invoke the getter and setter
