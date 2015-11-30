@@ -273,7 +273,7 @@ public class ObjectRobber {
 
         // 如果沒有指定參數內容，那表示不用參數
         if (params == null) {
-            return invoke(object.getClass(), object, methodName, new Class[0], new Object[0]);
+            return (T) invoke(object.getClass(), object, methodName, new Class[0], new Object[0]);
         }
 
         // 不然就一一取得 params 的類別，然後再 invoke
@@ -300,7 +300,7 @@ public class ObjectRobber {
         if (possibleIndexSet.size() == 1) {
             Integer index = possibleIndexSet.iterator().next();
             args = methods[index.intValue()].getParameterTypes();
-            return invoke(object.getClass(), object, methodName, args, params);
+            return (T) invoke(object.getClass(), object, methodName, args, params);
 
         } else if (possibleIndexSet.isEmpty()) {
             throw new NoSuchMethodException(object.getClass().getName() + "." + methodName + "("
