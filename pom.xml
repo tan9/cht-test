@@ -125,6 +125,13 @@
             <version>2.5.1</version>
         </dependency>
         <dependency>
+            <!-- #149332 overriding dbunit's vulnerable commons-collections -->
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.187</version>
