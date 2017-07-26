@@ -23,9 +23,9 @@
     </organization>
 
     <scm>
-        <url>https://github.com/ChunghwaTelecom/cht-test</url>
-        <connection>scm:git:https://github.com/ChunghwaTelecom/cht-test.git</connection>
-        <developerConnection>scm:git:https://github.com/ChunghwaTelecom/cht-test.git</developerConnection>
+        <url>http://192.168.31.166/cht/cht-test</url>
+        <connection>scm:git:http://192.168.31.166/cht/cht-test.git</connection>
+        <developerConnection>scm:git:http://192.168.31.166/cht/cht-test.git</developerConnection>
     </scm>
 
     <properties>
@@ -155,11 +155,30 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.itemis.maven.plugins</groupId>
+                    <artifactId>unleash-maven-plugin</artifactId>
+                    <version>2.6.0</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.itemis.maven.plugins</groupId>
+                            <artifactId>unleash-scm-provider-git</artifactId>
+                            <version>2.1.0</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
     <repositories>
         <repository>
-            <id>cht-releases-repo</id>
+            <id>cht-releases</id>
             <name>ChunghwaTelecom Releases Repository</name>
-            <url>http://chunghwatelecom.github.io/repos/releases</url>
+            <url>http://192.168.30.95/nexus/content/repositories/cht-releases</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -169,9 +188,9 @@
         </repository>
 
         <repository>
-            <id>cht-snapshots-repo</id>
+            <id>cht-snapshots</id>
             <name>ChunghwaTelecom Snapshots Repository</name>
-            <url>http://chunghwatelecom.github.io/repos/snapshots</url>
+            <url>http://192.168.30.95/nexus/content/repositories/cht-snapshots</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
