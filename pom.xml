@@ -176,7 +176,7 @@
 
     <repositories>
         <repository>
-            <id>cht-releases</id>
+            <id>cht-releases-repo</id>
             <name>ChunghwaTelecom Releases Repository</name>
             <url>http://192.168.30.95/nexus/content/repositories/cht-releases</url>
             <releases>
@@ -188,7 +188,7 @@
         </repository>
 
         <repository>
-            <id>cht-snapshots</id>
+            <id>cht-snapshots-repo</id>
             <name>ChunghwaTelecom Snapshots Repository</name>
             <url>http://192.168.30.95/nexus/content/repositories/cht-snapshots</url>
             <releases>
