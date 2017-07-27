@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -200,4 +199,17 @@
             </snapshots>
         </repository>
     </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>cht-releases-repo</id>
+            <name>ChunghwaTelecom Releases Repository</name>
+            <url>http://192.168.30.95/nexus/content/repositories/cht-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>cht-snapshots-repo</id>
+            <name>ChunghwaTelecom Snapshots Repository</name>
+            <url>http://192.168.30.95/nexus/content/repositories/cht-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
