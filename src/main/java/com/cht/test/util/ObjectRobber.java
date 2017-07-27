@@ -253,10 +253,10 @@ public class ObjectRobber {
      * @return 執行結果，如果該函式沒有回傳值，則回傳 <code>null</code>。
      * @throws SecurityException
      *             表示無法完成本項要求。
+     * @throws NoSuchMethodException
+     *             表示 Method 名稱錯誤。
      * @throws IllegalAccessException
      *             代表無存取權限。
-     * @throws IllegalArgumentException
-     *             表示丟入的參數錯誤，均不可為 <code>null</code>。
      * @throws InvocationTargetException
      *             表示呼叫底層物件時發生錯錯誤。
      */
@@ -340,8 +340,8 @@ public class ObjectRobber {
      * @return 初始化後的物件。
      * @throws SecurityException
      *             表示無法完成本項要求。
-     * @throws NoSuchFieldException
-     *             表示欄位名稱錯誤。
+     * @throws NoSuchMethodException
+     *             表示 Method 名稱錯誤。
      * @throws IllegalAccessException
      *             代表無存取權限。
      * @throws IllegalArgumentException
