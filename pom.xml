@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.cht</groupId>
         <artifactId>cht-parent</artifactId>
-        <version>2</version>
+        <version>3-SNAPSHOT</version>
     </parent>
     <groupId>com.cht.test</groupId>
     <artifactId>cht-test</artifactId>
@@ -155,25 +155,6 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>com.itemis.maven.plugins</groupId>
-                    <artifactId>unleash-maven-plugin</artifactId>
-                    <version>2.6.0</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.itemis.maven.plugins</groupId>
-                            <artifactId>unleash-scm-provider-git</artifactId>
-                            <version>2.1.0</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
-
     <repositories>
         <repository>
             <id>cht-releases-repo</id>
@@ -200,17 +181,4 @@
             </snapshots>
         </repository>
     </repositories>
-
-    <distributionManagement>
-        <repository>
-            <id>cht-releases-repo</id>
-            <name>ChunghwaTelecom Releases Repository</name>
-            <url>http://192.168.30.95/nexus/content/repositories/cht-releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>cht-snapshots-repo</id>
-            <name>ChunghwaTelecom Snapshots Repository</name>
-            <url>http://192.168.30.95/nexus/content/repositories/cht-snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
