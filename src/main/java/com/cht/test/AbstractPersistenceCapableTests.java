@@ -4,7 +4,7 @@ import com.cht.test.persistence.CleanInsertTestExecutionListener;
 import com.cht.test.persistence.DataSetLocation;
 
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
