@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -10,7 +9,7 @@
     </parent>
     <groupId>com.cht.test</groupId>
     <artifactId>cht-test</artifactId>
-    <version>0.2.3-SNAPSHOT</version>
+    <version>0.2.3</version>
     <packaging>jar</packaging>
 
     <name>CHT Test Framework</name>
@@ -27,7 +26,7 @@
         <url>http://192.168.31.166/cht/cht-test</url>
         <connection>scm:git:http://192.168.31.166/cht/cht-test.git</connection>
         <developerConnection>scm:git:http://192.168.31.166/cht/cht-test.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v0.2.3</tag>
     </scm>
 
     <properties>
