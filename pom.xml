@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.cht</groupId>
         <artifactId>cht-parent</artifactId>
-        <version>3-SNAPSHOT</version>
+        <version>3</version>
     </parent>
     <groupId>com.cht.test</groupId>
     <artifactId>cht-test</artifactId>
