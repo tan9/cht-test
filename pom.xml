@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.cht.test</groupId>
     <artifactId>cht-test</artifactId>
-    <version>0.2.3</version>
+    <version>0.2.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>CHT Test Framework</name>
@@ -26,7 +26,7 @@
         <url>http://192.168.31.166/cht/cht-test</url>
         <connection>scm:git:http://192.168.31.166/cht/cht-test.git</connection>
         <developerConnection>scm:git:http://192.168.31.166/cht/cht-test.git</developerConnection>
-        <tag>v0.2.3</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
