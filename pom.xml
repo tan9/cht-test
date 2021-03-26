@@ -23,8 +23,8 @@
 
     <scm>
         <url>http://192.168.31.166/cht/cht-test</url>
-        <connection>scm:git:http://192.168.31.166/cht/cht-test.git</connection>
-        <developerConnection>scm:git:http://192.168.31.166/cht/cht-test.git</developerConnection>
+        <connection>scm:git:git@192.168.31.166:cht/cht-test.git</connection>
+        <developerConnection>scm:git:git@192.168.31.166:cht/cht-test.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
